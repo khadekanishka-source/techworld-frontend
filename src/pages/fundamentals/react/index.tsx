@@ -61,9 +61,9 @@ function CodeEditor({ lang = "jsx", code, label }: { lang?: string; code: string
 // Note Component (optional info box)
 function Note({ type = "info", children }: { type?: "info" | "warn" | "tip" | "error"; children: React.ReactNode }) {
   const styles = {
-    info:  { bg: "bg-blue-500/10 border-blue-500/30", icon: "💡", text: "text-blue-300" },
-    warn:  { bg: "bg-yellow-500/10 border-yellow-500/30", icon: "⚠️", text: "text-yellow-300" },
-    tip:   { bg: "bg-green-500/10 border-green-500/30", icon: "✅", text: "text-green-300" },
+    info: { bg: "bg-blue-500/10 border-blue-500/30", icon: "💡", text: "text-blue-300" },
+    warn: { bg: "bg-yellow-500/10 border-yellow-500/30", icon: "⚠️", text: "text-yellow-300" },
+    tip: { bg: "bg-green-500/10 border-green-500/30", icon: "✅", text: "text-green-300" },
     error: { bg: "bg-red-500/10 border-red-500/30", icon: "❌", text: "text-red-300" },
   };
   const s = styles[type];
@@ -110,127 +110,187 @@ const curriculum: Module[] = [
       {
         id: "what-is-react",
         title: "What is React?",
-        duration: "6 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">What is React?</h2>
-<p class="text-gray-300 mb-4">React is a JavaScript library for building user interfaces, developed by Facebook. It is component‑based, declarative, and uses a virtual DOM for efficient rendering.</p>
-<h3 class="text-xl font-semibold text-white mb-3">Key Features</h3>
-<ul class="list-disc pl-6 space-y-2 text-gray-300">
-  <li>Declarative: Describe the UI for each state, React updates and renders efficiently.</li>
-  <li>Component‑Based: Encapsulate behaviour and look into reusable pieces.</li>
-  <li>Learn Once, Write Anywhere: Works with React DOM (web) and React Native (mobile).</li>
-</ul>`,
-        codeBlocks: []
+        duration: "5 min",
+        content: `<h2 class="text-2xl font-bold text-white mb-4">Introduction to React</h2>
+<p class="text-gray-300 mb-4">React is a popular open-source JavaScript library developed by Facebook. It is used exclusively for building fast, interactive, and scalable user interfaces (UIs) for single-page applications.</p>
+
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Why Use React? (W3Schools Style)</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-6">
+  <li><strong>Component-Based:</strong> You build small, isolated pieces of code called components (like a button or a navigation bar) and combine them to create complex UIs.</li>
+  <li><strong>Virtual DOM:</strong> Instead of reloading the entire page when something changes, React updates only the specific part that changed, making your apps incredibly fast.</li>
+  <li><strong>Declarative Syntax:</strong> You simply design how the UI should look based on the current data, and React handles updating the screen automatically.</li>
+</ul>
+
+<div class="bg-slate-800/50 border border-slate-700 rounded-lg p-4 mb-4">
+  <p class="text-sm text-amber-400 font-medium">💡 Quick Note for Students:</p>
+  <p class="text-xs text-gray-400 mt-1">To learn React effectively, you should already have a basic understanding of HTML, CSS, and modern JavaScript (ES6+ arrays, arrow functions, and destructuring).</p>
+</div>`,
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "BasicComponent.jsx",
+            code: `// A simple React component looks like this:\nfunction WelcomeMessage() {\n  return (\n    <div>\n      <h1>Welcome to Tech World!</h1>\n      <p>Let's master React step by step.</p>\n    </div>\n  );\n}\n\nexport default WelcomeMessage;`
+          }
+        ]
       },
       {
         id: "first-component",
         title: "Your First Component",
         duration: "8 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Creating a Component</h2>
-<p class="text-gray-300 mb-4">A React component is a function that returns JSX (HTML‑like syntax).</p>`,
-        codeBlocks: [{ lang: "jsx", label: "Greeting.jsx", code: `function Greeting() {\n  return <h1>Hello, React!</h1>;\n}\n\nexport default Greeting;` }]
-      }
-    ]
-  },
-  {
-    id: "basics",
-    title: "React Basics",
-    icon: () => <span className="text-blue-400">📘</span>,
-    color: "text-blue-400",
-    lessons: [
+        content: `<h2 class="text-2xl font-bold text-white mb-4">React Components</h2>
+<p class="text-gray-300 mb-4">Components are the building blocks of any React application. They allow you to split the UI into independent, reusable pieces.</p>
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Crucial Component Rules</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-6">
+  <li><strong>Naming Convention:</strong> Component names <em>must</em> always start with an uppercase letter.</li>
+  <li><strong>Single Return Root:</strong> A component can only return a single parent element.</li>
+</ul>
+<div class="bg-emerald-950/40 border border-emerald-800/60 rounded-lg p-4 mb-4">
+  <p class="text-sm text-emerald-400 font-medium">Task for Students:</p>
+  <p class="text-xs text-gray-300 mt-1">Look at the workspace editor. Modify the component code to see updates.</p>
+</div>`,
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "ButtonComponent.jsx",
+            code: `import React from 'react';\n\nfunction CustomButton() {\n  return (\n    <button>Click Me</button>\n  );\n}`
+          }
+        ]
+    
+      },
+    
       {
-        id: "jsx",
-        title: "JSX",
+        id: "react-basics",
+        title: "React Basics",
         duration: "10 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">JSX – JavaScript XML</h2>
-<p class="text-gray-300 mb-4">JSX allows you to write HTML inside JavaScript. It gets transpiled to <code>React.createElement()</code> calls.</p>
-<ul class="list-disc pl-6 space-y-2 text-gray-300">
-  <li>Embed expressions with <code>{}</code>.</li>
-  <li>Use <code>className</code> instead of <code>class</code>.</li>
-  <li>Self‑close tags like <code>&lt;img /&gt;</code>.</li>
+        content: `<h2 class="text-2xl font-bold text-white mb-4">React JSX Introduction</h2>
+<p class="text-gray-300 mb-4">JSX is an extension of JavaScript that allows developers to write HTML-like markup directly inside a React file. It simplifies the process of creating and structuring user interfaces.</p>
+<div class="bg-slate-800/50 border-l-4 border-cyan-500 p-4 mb-4 rounded-r-lg">
+  <p class="text-gray-300 font-semibold"><strong>W3Schools Tip:</strong> JSX is not mandatory for React, but it makes your code much cleaner and easier to maintain.</p>
+</div>
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Core Syntax Rules:</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+  <li><strong>Single Parent Element:</strong> Your markup must return a solitary root element like a <code>&lt;div&gt;</code> or an empty fragment <code>&lt;&gt;&lt;/&gt;</code>.</li>
+  <li><strong>Strict Closing Tags:</strong> Every element must be explicitly closed. Self-closing tags must end with a slash, such as <code>&lt;input /&gt;</code>.</li>
+  <li><strong>JavaScript Expressions:</strong> You can embed dynamic logic or variables into your HTML by wrapping them in curly braces <code>{ }</code>.</li>
+  <li><strong>Naming Conventions:</strong> Because JSX compiles into JavaScript, it uses camelCase for attributes like <code>className</code>.</li>
 </ul>`,
-        codeBlocks: [{ lang: "jsx", label: "JSXExample.jsx", code: `const name = "Alice";\nconst element = <h1>Hello, {name}!</h1>;\n\n// Equivalent to:\n// const element = React.createElement('h1', null, 'Hello, Alice!');` }]
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "App.jsx",
+            code: `import React from 'react';\n\nfunction App() {\n  const greeting = "Welcome to React Tutorial";\n  return (\n    <div>\n      <h1>{greeting}</h1>\n      <p>JSX makes UI development simple.</p>\n    </div>\n  );\n}`
+          }
+        ]
       },
       {
         id: "props",
-        title: "Props (Properties)",
+        title: "React Props",
         duration: "12 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Passing Data with Props</h2>
-<p class="text-gray-300 mb-4">Props are read‑only inputs passed from parent to child.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "PropsExample.jsx", code: `function Welcome(props) {\n  return <h1>Welcome, {props.name}!</h1>;\n}\n\n// Usage\n<Welcome name="Alice" />` }]
-      },
+        content: `
+          <h2 class="text-2xl font-bold text-white mb-4">React Components Props</h2>
+          <p class="text-gray-300 mb-4">Props (short for properties) are read-only configuration objects passed into React components. They act exactly like custom HTML attributes and allow components to talk to one another.</p>
+          
+          <div class="bg-slate-800/50 border-l-4 border-yellow-500 p-4 mb-4 rounded-r-lg">
+            <p class="text-gray-300 font-semibold"><strong>Important Rule:</strong> Props are immutable. A component can read incoming data but must never attempt to change it directly.</p>
+          </div>
+
+          <h3 class="text-xl font-semibold text-cyan-400 mb-3">Data Flow Concept:</h3>
+          <p class="text-gray-300 mb-4">In React, data flows in a single direction (downwards from parent to child). You assign attributes in the parent element, and the child component receives them as an grouped object parameter.</p>
+          
+          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 mb-4">
+            <p class="text-gray-400 text-sm mb-1">// Parent passing a string variable named 'user'</p>
+            <code class="text-emerald-400">&lt;UserDashboard user="Alex" /&gt;</code>
+          </div>
+        `,
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "UserDashboard.jsx",
+            code: `// Child component extracting and reading data\nfunction UserDashboard(props) {\n  return (\n    <section>\n      <h3>Active Profile</h3>\n      <p>Logged in user: {props.user}</p>\n    </section>\n  );\n}\n\nexport default UserDashboard;`
+          }
+        ],
+      
+    
+  
+
+      },  
+  {
+    id: "state",
+    title: "React State",
+    duration: "12min",
+    content: `<h2 class="text-2xl font-bold text-white mb-4">React State Introduction</h2>
+<p class="text-gray-300 mb-4">React components have a built-in state object. State is where you store local property values that belong directly to the component. When the state value changes, the component automatically re-renders.</p>
+<div class="bg-slate-800/50 border-l-4 border-cyan-500 p-4 mb-4 rounded-r-lg">
+  <p class="text-gray-300 font-semibold"><strong>Core Concept:</strong> In modern functional development, we use the <code>useState</code> Hook to track, monitor, and update application data states seamlessly.</p>
+</div>
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">State Management Rules:</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+  <li><strong>Initialization:</strong> State variable blocks are declared inside a component function using Hook destructuring arrays.</li>
+  <li><strong>Immutability:</strong> Never modify state properties directly. Always execute edits via its dedicated setter mutation function.</li>
+</ul>
+`,
+    codeBlocks: [
       {
-        id: "state",
-        title: "State & useState Hook",
-        duration: "15 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Managing State</h2>
-<p class="text-gray-300 mb-4">State is data that can change over time. The <code>useState</code> hook lets you add state to function components.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "Counter.jsx", code: `import { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}` }]
-      },
-      {
-        id: "events",
-        title: "Handling Events",
-        duration: "8 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Events in React</h2>
-<p class="text-gray-300 mb-4">Event handlers are named <code>onClick</code>, <code>onChange</code>, etc. Use camelCase.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "EventHandler.jsx", code: `function ActionButton() {\n  function handleClick() {\n    alert('Button clicked!');\n  }\n  return <button onClick={handleClick}>Click</button>;\n}` }]
+        lang: "jsx",
+        label: "Counter.jsx",
+        code: `import React, { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>Click me</button>\n    </div>\n  );\n}`
       }
     ]
   },
   {
-    id: "advanced",
-    title: "Advanced React",
-    icon: () => <span className="text-purple-400">🚀</span>,
-    color: "text-purple-400",
-    lessons: [
+    id: "handling-events",
+    title: "Handling Events",
+    duration: "9 min",
+    content: `<h2 class="text-2xl font-bold text-white mb-4">React Event Handling</h2>
+<p class="text-gray-300 mb-4">React can trigger specific operational code functions based on active user input behaviors like button clicks, form mutations, or hover triggers.</p>
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Key Event Rules:</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+  <li><strong>CamelCase Listeners:</strong> Event listeners follow camelCase rules (e.g., use <code>onClick</code> instead of standard lowercase <code>onclick</code>).</li>
+  <li><strong>Function References:</strong> Pass full executable handler method declarations directly within curly braces instead of layout string symbols.</li>
+</ul>`,
+    codeBlocks: [
       {
-        id: "useEffect",
-        title: "useEffect Hook",
-        duration: "14 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Side Effects with useEffect</h2>
-<p class="text-gray-300 mb-4"><code>useEffect</code> lets you perform side effects (data fetching, subscriptions, DOM updates). It runs after every render by default, but you can control when it runs with dependencies.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "UseEffectExample.jsx", code: `import { useState, useEffect } from 'react';\n\nfunction DataFetcher() {\n  const [data, setData] = useState([]);\n\n  useEffect(() => {\n    fetch('https://api.example.com/data')\n      .then(res => res.json())\n      .then(data => setData(data));\n  }, []); // empty array = run once on mount\n\n  return <div>{/* render data */}</div>;\n}` }]
-      },
-      {
-        id: "context",
-        title: "Context API",
-        duration: "12 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Sharing Data with Context</h2>
-<p class="text-gray-300 mb-4">Avoid prop drilling by using React Context to share global data (theme, user, etc.).</p>`,
-        codeBlocks: [{ lang: "jsx", label: "ThemeContext.jsx", code: `import { createContext, useContext, useState } from 'react';\n\nconst ThemeContext = createContext();\n\nexport function ThemeProvider({ children }) {\n  const [theme, setTheme] = useState('light');\n  return (\n    <ThemeContext.Provider value={{ theme, setTheme }}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}\n\nexport function useTheme() {\n  return useContext(ThemeContext);\n}` }]
-      },
-      {
-        id: "lists-keys",
-        title: "Lists and Keys",
-        duration: "10 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Rendering Lists</h2>
-<p class="text-gray-300 mb-4">Use <code>map()</code> to render arrays of elements. Each list item needs a unique <code>key</code> prop.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "TodoList.jsx", code: `function TodoList({ todos }) {\n  return (\n    <ul>\n      {todos.map(todo => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}` }]
-      },
-      {
-        id: "forms",
-        title: "Forms & Controlled Components",
-        duration: "12 min",
-        content: `<h2 class="text-2xl font-bold text-white mb-4">Controlled Components</h2>
-<p class="text-gray-300 mb-4">React forms are typically "controlled" – the input’s value is bound to state and updated via <code>onChange</code>.</p>`,
-        codeBlocks: [{ lang: "jsx", label: "Form.jsx", code: `import { useState } from 'react';\n\nfunction LoginForm() {\n  const [email, setEmail] = useState('');\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    console.log('Submitted:', email);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        type="email"\n        value={email}\n        onChange={(e) => setEmail(e.target.value)}\n      />\n      <button type="submit">Submit</button>\n    </form>\n  );\n}` }]
+        lang: "jsx",
+        label: "Football.jsx",
+        code: `function Football() {\n  const shoot = () => {\n    alert("Great Shot!");\n  };\n  return (\n    <button onClick={shoot}>Take the shot!</button>\n  );\n}`
       }
+    ]
+  },
+  {
+      id: "forms",
+      title: "React Forms",
+      duration: "11 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Managing Forms in React</h2>
+<p class="text-gray-300 mb-4">In React, form data is usually handled by the component's state. This pattern is known as <em>controlled components</em>, where the state serves as the single source of truth.</p>
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Key Form Concepts:</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+  <li><strong>onChange Handler:</strong> Every input element updates the state using an <code>onChange</code> event tracking function.</li>
+  <li><strong>onSubmit Handler:</strong> Form submission is captured with <code>onSubmit</code>, where you must use <code>event.preventDefault()</code> to stop the page from refreshing.</li>
+</ul>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "MyForm.jsx",
+          code: `import React, { useState } from 'react';\n\nfunction MyForm() {\n  const [name, setName] = useState("");\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    alert(\`Submitted name: \${name}\`);\n  };\n  return (\n    <form onSubmit={handleSubmit}>\n      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />\n      <button type="submit">Submit</button>\n    </form>\n  );\n}`
+        }
+      ]
+    }
     ]
   }
 ];
-
-// ============================================================================
-// LessonView Component
-// ============================================================================
-function LessonView({ lesson, completedLessons, onComplete }: {
-  lesson: Lesson;
-  completedLessons: string[];
-  onComplete: (id: string) => void;
-}) {
-  const isDone = completedLessons.includes(lesson.id);
-  return (
-    <div className="min-h-full">
-      <div
-        className="prose prose-invert max-w-none
+  // ============================================================================
+  // LessonView Component
+  // ============================================================================
+  function LessonView({ lesson, completedLessons, onComplete }: {
+    lesson: Lesson;
+    completedLessons: string[];
+    onComplete: (id: string) => void;
+  }) {
+    const isDone = completedLessons.includes(lesson.id);
+    return (
+      <div className="min-h-full">
+        <div
+          className="prose prose-invert max-w-none
           prose-h2:text-2xl prose-h2:font-bold prose-h2:text-white prose-h2:mt-8 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-700/50 prose-h2:pb-3
           prose-h3:text-lg prose-h3:font-semibold prose-h3:text-blue-300 prose-h3:mt-6 prose-h3:mb-3
           prose-p:text-gray-300 prose-p:leading-7 prose-p:mb-4
@@ -238,27 +298,27 @@ function LessonView({ lesson, completedLessons, onComplete }: {
           prose-li:mb-1 prose-li:leading-7
           prose-strong:text-white
           prose-code:text-blue-300 prose-code:bg-blue-900/30 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono"
-        dangerouslySetInnerHTML={{ __html: lesson.content }}
-      />
-      {lesson.codeBlocks?.map((cb, i) => <CodeEditor key={i} lang={cb.lang} code={cb.code} label={cb.label} />)}
-      {!isDone && (
-        <button
-          onClick={() => onComplete(lesson.id)}
-          className="mt-10 flex items-center gap-2 px-5 py-2.5 bg-green-600/20 text-green-400 border border-green-500/30 rounded-xl hover:bg-green-600/30 transition-all text-sm font-medium"
-        >
-          <CheckCircle className="w-4 h-4" />
-          Mark Lesson as Complete
-        </button>
-      )}
-      {isDone && (
-        <div className="mt-10 flex items-center gap-2 px-5 py-2.5 bg-green-600/10 text-green-400 border border-green-500/20 rounded-xl text-sm font-medium w-fit">
-          <CheckCircle className="w-4 h-4" />
-          Lesson Completed!
-        </div>
-      )}
-    </div>
-  );
-}
+          dangerouslySetInnerHTML={{ __html: lesson.content }}
+        />
+        {lesson.codeBlocks?.map((cb, i) => <CodeEditor key={i} lang={cb.lang} code={cb.code} label={cb.label} />)}
+        {!isDone && (
+          <button
+            onClick={() => onComplete(lesson.id)}
+            className="mt-10 flex items-center gap-2 px-5 py-2.5 bg-green-600/20 text-green-400 border border-green-500/30 rounded-xl hover:bg-green-600/30 transition-all text-sm font-medium"
+          >
+            <CheckCircle className="w-4 h-4" />
+            Mark Lesson as Complete
+          </button>
+        )}
+        {isDone && (
+          <div className="mt-10 flex items-center gap-2 px-5 py-2.5 bg-green-600/10 text-green-400 border border-green-500/20 rounded-xl text-sm font-medium w-fit">
+            <CheckCircle className="w-4 h-4" />
+            Lesson Completed!
+          </div>
+        )}
+      </div>
+    );
+  }
 
 // ============================================================================
 // Main Component
