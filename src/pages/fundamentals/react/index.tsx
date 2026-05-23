@@ -107,6 +107,33 @@ const curriculum: Module[] = [
     icon: () => <span className="text-cyan-400">⚛️</span>,
     color: "text-cyan-400",
     lessons: [
+    
+      {
+      id: "installation-guide",
+      title: "1. Project Setup & Installation",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Setting Up Your React Environment</h2>
+<p class="text-gray-300 mb-4">Before starting with code development, every student needs to configure their local development machine with Node.js and pull down the project core package dependencies.</p>
+
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Prerequisites</h3>
+<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+  <li><strong>Node.js:</strong> Ensure you have the latest LTS version installed from <a href="https://nodejs.org/" target="_blank" class="text-cyan-400 underline">nodejs.org</a>.</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-cyan-400 mb-3">Step-by-Step Instructions</h3>
+<ol class="list-decimal pl-6 space-y-3 text-gray-300 mb-4">
+  <li><strong>Navigate to Your Project Folder:</strong> Open your terminal/command prompt and make sure you are working in the root directory where the code lives.</li>
+  <li><strong>Install Packages:</strong> Execute the package installer command to pull in React, Vite, and CSS dependencies.</li>
+  <li><strong>Boot the Environment:</strong> Start up the local fast-refresh engine server.</li>
+</ol>`,
+      codeBlocks: [
+        {
+          lang: "bash",
+          label: "Terminal Commands",
+          code: `# Step 1: Install all package dependencies\nnpm install\n\n# Step 2: Spin up the local development web server\nnpm run dev`
+        }
+      ]
+    },
       {
         id: "what-is-react",
         title: "What is React?",
@@ -274,10 +301,97 @@ const curriculum: Module[] = [
           code: `import React, { useState } from 'react';\n\nfunction MyForm() {\n  const [name, setName] = useState("");\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    alert(\`Submitted name: \${name}\`);\n  };\n  return (\n    <form onSubmit={handleSubmit}>\n      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />\n      <button type="submit">Submit</button>\n    </form>\n  );\n}`
         }
       ]
+    },
+      {
+        id: "react-router",
+        title: "React Router (Navigation)",
+        duration: "18 min",
+        content: `<h2 class="text-2xl font-bold text-white mb-4">Multi-Page Navigation</h2>\n<p class="text-gray-300 mb-4">React apps are Single Page Applications (SPAs). We use React Router to switch views instantly by syncing the UI components with the browser URL without page reloads.</p>`,
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "AppRouter.jsx",
+            code: `import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';\n\nexport default function AppRouter() {\n  return (\n    <BrowserRouter>\n      <nav class="flex gap-4 mb-4">\n        <Link to="/" class="text-cyan-400">Home</Link>\n        <Link to="/about" class="text-cyan-400">About</Link>\n      </nav>\n      <Routes>\n        <Route path="/" element={<Home />} />\n        <Route path="/about" element={<About />} />\n      </Routes>\n    </BrowserRouter>\n  );\n}`
+          }
+        ]
+      },
+      {
+        id: "api-fetching",
+        title: "API Data Fetching",
+        duration: "15 min",
+        content: `<h2 class="text-2xl font-bold text-white mb-4">Connecting to External APIs</h2>\n<p class="text-gray-300 mb-4">Real-world applications load dynamic data from servers. Using the standard <code>useEffect</code> hook alongside <code>fetch</code> or <code>axios</code> handles this cleanly side-effect style.</p>`,
+        codeBlocks: [
+          {
+            lang: "jsx",
+            label: "DataList.jsx",
+            code: `import React, { useState, useEffect } from 'react';\n\nexport default function DataList() {\n  const [items, setItems] = useState([]);\n\n  useEffect(() => {\n    fetch('https://api.example.com/items')\n      .then(res => res.json())\n      .then(data => setItems(data));\n  }, []);\n\n  return (\n    <ul class="text-gray-300">\n      {items.map(item => <li key={item.id}>{item.name}</li>)}\n    </ul>\n  );\n}`
+          }
+        ]
+      },
+      {
+      id: "context-api",
+      title: "React Context API",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Global State via Context API</h2>\n<p class="text-gray-300 mb-4">Passing props manually through nested child components is called Prop Drilling. Context API solves this by broadcasting data directly to any component that needs it.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "ThemeContext.jsx",
+          code: `import React, { createContext, useState } from 'react';\n\nexport const ThemeContext = createContext();\n\nexport function ThemeProvider({ children }) {\n  const [theme, setTheme] = useState('dark');\n  return (\n    <ThemeContext.Provider value={{ theme, setTheme }}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "custom-hooks",
+      title: "Custom React Hooks",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Building Custom Hooks</h2>\n<p class="text-gray-300 mb-4">When you have stateful logic that needs to be shared across multiple components, you can extract it into a reusable function. Custom hooks must always start with the word "use".</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "useFetch.jsx",
+          code: `import { useState, useEffect } from 'react';\n\nexport function useToggle(initialValue = false) {\n  const [value, setValue] = useState(initialValue);\n  const toggle = () => setValue(!value);\n  return [value, toggle];\n}`
+        }
+      ]
+    },
+    {
+      id: "react-optimization",
+      title: "React Performance (useMemo & useCallback)",
+      duration: "18 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Optimizing React Performance</h2>\n<p class="text-gray-300 mb-4">By default, React components re-render whenever their parent re-renders or state changes. To avoid heavy calculation lags or unnecessary function recreations, we use caching hooks.</p>\n<h3 class="text-xl font-semibold text-cyan-400 mb-3">Core Performance Hooks:</h3>\n<ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">\n  <li><strong>useMemo:</strong> Caches the calculated <em>result value</em> of an expensive computation.</li>\n  <li><strong>useCallback:</strong> Caches the <em>function definition itself</em> between renders to maintain strict reference checks.</li>\n</ul>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "MemoComponent.jsx",
+          code: `import React, { useState, useMemo, useCallback } from 'react';\n\nexport default function MemoComponent() {\n  const [count, setCount] = useState(0);\n  const [items] = useState([1, 2, 3, 4, 5]);\n\n  const heavyCalculation = useMemo(() => {\n    return items.map(i => i * 100).reduce((a, b) => a + b, 0);\n  }, [items]);\n\n  const logMessage = useCallback(() => {\n    console.log("Button clicked!");\n  }, []);\n\n  return <button onClick={logMessage}>Total: {heavyCalculation}</button>;\n}`
+        }
+      ]
+    },
+    {
+      id: "advanced-forms",
+      title: "Advanced Forms & Validation",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Advanced Form Management</h2>\n<p class="text-gray-300 mb-4">Handling complex production-grade forms with multiple fields requires structured logic constraints for tracking submission errors and instant validation handling.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "ValidatedForm.jsx",
+          code: `import React, { useState } from 'react';\n\nexport default function ValidatedForm() {\n  const [email, setEmail] = useState("");\n  const [error, setError] = useState("");\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    if (!email.includes("@")) {\n      setError("Invalid Email Address");\n    } else {\n      setError("");\n      alert("Form submitted safely!");\n    }\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input value={email} onChange={(e) => setEmail(e.target.value)} />\n      {error && <span class="text-red-500">{error}</span>}\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}`
+        }
+      ]
     }
-    ]
-  }
+  ]
+}
 ];
+  
+
+
+    
+  
+
+  
+  
+
   // ============================================================================
   // LessonView Component
   // ============================================================================
