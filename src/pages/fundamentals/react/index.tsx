@@ -379,14 +379,317 @@ const curriculum: Module[] = [
           code: `import React, { useState } from 'react';\n\nexport default function ValidatedForm() {\n  const [email, setEmail] = useState("");\n  const [error, setError] = useState("");\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    if (!email.includes("@")) {\n      setError("Invalid Email Address");\n    } else {\n      setError("");\n      alert("Form submitted safely!");\n    }\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input value={email} onChange={(e) => setEmail(e.target.value)} />\n      {error && <span class="text-red-500">{error}</span>}\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}`
         }
       ]
+    },
+    {
+      id: "react-jsx-intro",
+      title: "React JSX Intro",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Introduction to JSX</h2>\n<p class="text-gray-300 mb-4">JSX stands for JavaScript XML. It allows us to write HTML element tags directly inside JavaScript structures, creating a clear template layout pattern for user interfaces.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "JsxIntro.jsx",
+          code: `import React from 'react';\n\nexport default function JsxIntro() {\n  return (\n    <div className="p-4 bg-slate-800 rounded">\n      <h1 className="text-white text-xl">Hello from React JSX!</h1>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-jsx-expressions",
+      title: "JSX Expressions",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Embedding Expressions</h2>\n<p class="text-gray-300 mb-4">You can wrap any valid JavaScript expression inside curly braces <code>{}</code> directly within your JSX templates to display dynamic variables, strings, or calculated values.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "JsxExpressions.jsx",
+          code: `import React from 'react';\n\nexport default function JsxExpressions() {\n  const userName = "Alex";\n  const currentYear = new Date().getFullYear();\n\n  return (\n    <div className="text-white p-4 bg-slate-800 rounded">\n      <p>Developer: {userName}</p>\n      <p>Copyright Year: {currentYear}</p>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-jsx-attributes",
+      title: "JSX Attributes",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Using JSX Attributes</h2>\n<p class="text-gray-300 mb-4">JSX uses camelCase notation for attributes. For example, standard HTML <code>class</code> becomes <code>className</code>, and inline styling is passed using a keyed object structure.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "JsxAttributes.jsx",
+          code: `import React from 'react';\n\nexport default function JsxAttributes() {\n  const customImg = "https://placehold.co/100";\n\n  return (\n    <div className="p-4 bg-slate-800 border border-slate-700 rounded">\n      <img src={customImg} alt="Dynamic Avatar" className="rounded-full shadow-lg" />\n      <div style={{ color: '#22d3ee', marginTop: '10px' }}>Custom Highlight Color</div>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-conditionals",
+      title: "React Conditionals",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Conditional Rendering</h2>\n<p class="text-gray-300 mb-4">React components determine visible screen fragments dynamically using standard logic operations, ternary expressions, or short-circuit <code>&&</code> statements.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "Conditionals.jsx",
+          code: `import React, { useState } from 'react';\n\nexport default function Conditionals() {\n  const [isLoggedIn, setIsLoggedIn] = useState(false);\n\n  return (\n    <div className="p-4 text-white bg-slate-800 rounded">\n      {isLoggedIn ? <p>Welcome back, Premium Member!</p> : <p>Please log in.</p>}\n      <button onClick={() => setIsLoggedIn(!isLoggedIn)} className="mt-2 bg-cyan-600 px-3 py-1 rounded">\n        {isLoggedIn ? "Log Out" : "Log In"}\n      </button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-multiple-inputs",
+      title: "React Multiple Inputs",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Handling Multiple Text Inputs</h2>\n<p class="text-gray-300 mb-4">Instead of writing distinct separate change states for every field input, add a <code>name</code> attribute property to each control tag to compute update states globally inside a single method.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "MultipleInputs.jsx",
+          code: `import React, { useState } from 'react';\n\nexport default function MultipleInputs() {\n  const [profile, setProfile] = useState({ firstName: '', lastName: '' });\n\n  const handleInputChange = (e) => {\n    const { name, value } = e.target;\n    setProfile(prev => ({ ...prev, [name]: value }));\n  };\n\n  return (\n    <div className="space-y-2 p-4 bg-slate-800 rounded text-white">\n      <input name="firstName" value={profile.firstName} onChange={handleInputChange} className="bg-slate-900 p-2 block" placeholder="First Name" />\n      <input name="lastName" value={profile.lastName} onChange={handleInputChange} className="bg-slate-900 p-2 block" placeholder="Last Name" />\n      <p>Full Name: {profile.firstName} {profile.lastName}</p>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-checkbox",
+      title: "React Checkbox Inputs",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Handling Checkboxes</h2>\n<p class="text-gray-300 mb-4">Checkboxes do not use <code>e.target.value</code>. Instead, track boolean states by targeting the input parameter's <code>e.target.checked</code> parameter framework flag.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "CheckboxInput.jsx",
+          code: `import React, { useState } from 'react';\n\nexport default function CheckboxInput() {\n  const [agreed, setAgreed] = useState(false);\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <label className="flex items-center gap-2">\n        <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />\n        Accept Terms and Conditions\n      </label>\n      <button disabled={!agreed} className="mt-3 bg-cyan-600 disabled:bg-gray-600 px-4 py-1 rounded">\n        Proceed Dashboard\n      </button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-radio",
+      title: "React Radio Inputs",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Handling Radio Controls</h2>\n<p class="text-gray-300 mb-4">Radio buttons let users pick a single option from an available selection array. Group them together by assigning identical string values to their <code>name</code> attributes.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "RadioInput.jsx",
+          code: `import React, { useState } from 'react';\n\nexport default function RadioInput() {\n  const [plan, setPlan] = useState('basic');\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white space-y-2">\n      <h3>Select Strategy Plan:</h3>\n      <label className="block">\n        <input type="radio" name="plan" value="basic" checked={plan === 'basic'} onChange={(e) => setPlan(e.target.value)} /> Basic\n      </label>\n      <label className="block">\n        <input type="radio" name="plan" value="premium" checked={plan === 'premium'} onChange={(e) => setPlan(e.target.value)} /> Premium\n      </label>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-portals",
+      title: "React Portals",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">DOM Portals Explained</h2>\n<p class="text-gray-300 mb-4">Portals allow components to render child elements into an isolated DOM node outside of the application's root component hierarchy. This is incredibly useful for modal dialog screens and fixed floating tooltips.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "PortalModal.jsx",
+          code: `import React from 'react';\nimport { createPortal } from 'react-dom';\n\nexport default function PortalModal({ isOpen, onClose }) {\n  if (!isOpen) return null;\n\n  return createPortal(\n    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">\n      <div className="bg-slate-900 p-6 border rounded shadow-2xl text-white">\n        <p>This modal component is rendered safely at document.body level.</p>\n        <button onClick={onClose} className="mt-4 bg-red-500 px-3 py-1 rounded">Close</button>\n      </div>\n    </div>,\n    document.body\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-suspense",
+      title: "React Suspense",
+      duration: "14 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Asynchronous Suspense Loading</h2>\n<p class="text-gray-300 mb-4">Suspense lets you coordinate view-loading states. It pauses rendering for data-dependent chunks and displays an interactive fallback layout screen while bundles download.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "SuspenseLoader.jsx",
+          code: `import React, { lazy, Suspense } from 'react';\n\nconst LazyProfileCard = lazy(() => import('./LazyProfileCard'));\n\nexport default function AppView() {\n  return (\n    <Suspense fallback={<div className="text-cyan-400">Loading module asset chunk...</div>}>\n      <LazyProfileCard />\n    </Suspense>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-css-styling",
+      title: "React CSS Styling",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Traditional CSS Layouts</h2>\n<p class="text-gray-300 mb-4">Traditional stylesheets can be loaded directly into your entry scope using a clear asset-import declaration path. These classes apply globally across all mounted components on the page.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "GlobalStyles.jsx",
+          code: `import React from 'react';\nimport './styles.css';\n\nexport default function GlobalStyles() {\n  return (\n    <div className="standard-box-container">\n      <h2 className="global-header-title text-white">Global Styled Heading</h2>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-css-modules",
+      title: "React CSS Modules",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Scoped CSS Modules</h2>\n<p class="text-gray-300 mb-4">CSS Modules automatically append unique local hash tags to your layout classes. This completely scopes styles to their respective files and eliminates global class name collision bugs.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "ModuleStyling.jsx",
+          code: `import React from 'react';\nimport classes from './Button.module.css';\n\nexport default function ModuleStyling() {\n  return (\n    <button className={classes.dashboardButton}>\n      Scoped Module Action Link\n    </button>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-sass",
+      title: "React SASS Integration",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Preprocessed SASS Styles</h2>\n<p class="text-gray-300 mb-4">Sass brings advanced layout powers into standard styling sheets, offering variables, mixins, and nested structure declarations out of the box.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "SassCard.jsx",
+          code: `import React from 'react';\nimport './CardStyles.scss';\n\nexport default function SassCard() {\n  return (\n    <div className="nested-sass-box">\n      <h3 className="sub-title text-white">Sass Structured Component</h3>\n      <p className="body-text text-gray-400">Nested block styling declaration syntax</p>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-transition",
+      title: "React Transitions",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Concurrent StartTransition API</h2>\n<p class="text-gray-300 mb-4">The <code>useTransition</code> hook lets you mark state updates as non-blocking background tasks. This keeps user-interactive inputs responsive while complex search views process.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "TransitionComponent.jsx",
+          code: `import React, { useState, useTransition } from 'react';\n\nexport default function TransitionComponent() {\n  const [isPending, startTransition] = useTransition();\n  const [filter, setFilter] = useState("");\n\n  const handleSearch = (e) => {\n    startTransition(() => {\n      setFilter(e.target.value);\n    });\n  };\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <input type="text" onChange={handleSearch} className="bg-slate-900 p-2 text-white" placeholder="Type to filter..." />\n      {isPending && <p class="text-gray-400 mt-2">Updating slow render frames...</p>}\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-forward-ref",
+      title: "React ForwardRef",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Forwarding Target Element References</h2>\n<p class="text-gray-300 mb-4"><code>forwardRef</code> lets parent components pass a mutable ref reference downward directly into an underlying domestic child element tag.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "ForwardInput.jsx",
+          code: `import React, { forwardRef, useRef } from 'react';\n\nconst InputField = forwardRef((props, ref) => (\n  <input ref={ref} className="bg-slate-900 text-white p-2 border" {...props} />\n));\n\nexport default function FocusManager() {\n  const textRef = useRef(null);\n  const triggerFocus = () => textRef.current.focus();\n\n  return (\n    <div className="p-4 bg-slate-800 rounded">\n      <InputField ref={textRef} placeholder="Target focus field..." />\n      <button onClick={triggerFocus} className="ml-2 bg-cyan-600 px-3 py-1 rounded text-white">Focus Field</button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-hoc",
+      title: "React Higher Order Components",
+      duration: "18 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Higher-Order Components (HOC)</h2>\n<p class="text-gray-300 mb-4">An HOC is a specialized functional architecture pattern. It takes a base component as a parameter and returns a new component preloaded with shared extra functional capabilities.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "WithLoggerHOC.jsx",
+          code: `import React from 'react';\n\nfunction withMetricsLog(Component) {\n  return (props) => {\n    console.log("Component viewport mounted to viewport analytics tracking trace hook.");\n    return <Component {...props} />;\n  };\n}\n\nfunction DashboardMetrics() {\n  return <div className="text-white">Secure Data Content Module View</div>;\n}\n\nexport default withMetricsLog(DashboardMetrics);`
+        }
+      ]
+    },
+    {
+      id: "react-usecontext",
+      title: "React useContext",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Managing Global State with Context</h2>\n<p class="text-gray-300 mb-4">The <code>useContext</code> hook lets you subscribe to React context without introducing prop-drilling manually through every intermediate child element level wrapper.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "ThemeConsumer.jsx",
+          code: `import React, { useContext } from 'react';\nimport { ThemeContext } from './ThemeContext';\n\nexport default function ThemeConsumer() {\n  const { theme, setTheme } = useContext(ThemeContext);\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <p>Active System Theme: <strong>{theme}</strong></p>\n      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="mt-2 bg-cyan-600 px-3 py-1 rounded">\n        Toggle Theme\n      </button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-useref",
+      title: "React useRef",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Persistent References with useRef</h2>\n<p class="text-gray-300 mb-4"><code>useRef</code> returns a mutable ref object whose <code>.current</code> property persists across renders. Changing it does not trigger a component re-render. It is commonly used to access domestic DOM elements directly.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "FocusRef.jsx",
+          code: `import React, { useRef } from 'react';\n\nexport default function FocusRef() {\n  const inputEl = useRef(null);\n\n  const onButtonClick = () => {\n    inputEl.current.focus();\n  };\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <input ref={inputEl} type="text" className="bg-slate-900 p-2 text-white border" />\n      <button onClick={onButtonClick} className="ml-2 bg-cyan-600 px-3 py-1 rounded">Focus Input</button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-usereducer",
+      title: "React useReducer",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Complex State with useReducer</h2>\n<p class="text-gray-300 mb-4">When state transitions get complex or depend on previous state trees, <code>useReducer</code> provides a predictable state mutation pattern using an action-dispatcher layout.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "CounterReducer.jsx",
+          code: `import React, { useReducer } from 'react';\n\nconst initialState = { count: 0 };\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case 'increment': return { count: state.count + 1 };\n    case 'decrement': return { count: state.count - 1 };\n    default: throw new Error();\n  }\n}\n\nexport default function CounterReducer() {\n  const [state, dispatch] = useReducer(reducer, initialState);\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <p>Count: {state.count}</p>\n      <button onClick={() => dispatch({ type: 'decrement' })} className="bg-red-600 px-2 py-1 rounded mr-2">-</button>\n      <button onClick={() => dispatch({ type: 'increment' })} className="bg-green-600 px-2 py-1 rounded">+</button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-usecallback",
+      title: "React useCallback",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Memoizing Functions with useCallback</h2>\n<p class="text-gray-300 mb-4"><code>useCallback</code> returns a memoized version of a callback function that only changes if one of the dependencies has updated. This prevents unnecessary renders when passing callbacks to optimized child components.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "CallbackComponent.jsx",
+          code: `import React, { useState, useCallback } from 'react';\n\nexport default function CallbackComponent() {\n  const [count, setCount] = useState(0);\n\n  const increment = useCallback(() => {\n    setCount((c) => c + 1);\n  }, []);\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <p>Count: {count}</p>\n      <button onClick={increment} className="bg-cyan-600 px-3 py-1 rounded">Increment</button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-usememo",
+      title: "React useMemo",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Caching Computations with useMemo</h2>\n<p class="text-gray-300 mb-4">The <code>useMemo</code> hook runs during rendering to calculate and cache the value result of an expensive compute process, checking dependencies before re-executing.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "MemoValue.jsx",
+          code: `import React, { useState, useMemo } from 'react';\n\nexport default function MemoValue() {\n  const [list] = useState([10, 20, 30, 40]);\n  const [renderingTrigger, setRenderingTrigger] = useState(false);\n\n  const computedSum = useMemo(() => {\n    console.log("Computing list sum values...");\n    return list.reduce((a, b) => a + b, 0);\n  }, [list]);\n\n  return (\n    <div className="p-4 bg-slate-800 rounded text-white">\n      <p>Sum Value calculation: {computedSum}</p>\n      <button onClick={() => setRenderingTrigger(!renderingTrigger)} className="text-xs text-gray-400 underline mt-2">Trigger Render</button>\n    </div>\n  );\n}`
+        }
+      ]
+    },
+    {
+      id: "react-customhooks",
+      title: "Custom React Hooks",
+      duration: "15 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Building Custom Hooks</h2>\n<p class="text-gray-300 mb-4">Custom hooks allow you to extract component stateful logic into reusable functions. They are standard JavaScript functions whose names always start with the keyword <code>use</code>.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "useLocalStorage.jsx",
+          code: `import { useState } from 'react';\n\nexport function useToggle(initialValue = false) {\n  const [value, setValue] = useState(initialValue);\n  const toggle = () => setValue(!value);\n  return [value, toggle];\n}`
+        }
+      ]
+    },
+    {
+      id: "react-render-html",
+      title: "React Render HTML",
+      duration: "10 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Rendering HTML into the DOM</h2>\n<p class="text-gray-300 mb-4">React connects with the browser page by injecting its virtual component tree straight into a domestic placeholder HTML container element (typically an element tagged with <code>id="root"</code>).</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "main.jsx",
+          code: `import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nimport './index.css';\n\n// Target the domestic HTML container div\nconst container = document.getElementById('root');\n\n// Initialize the root node and render the component tree\nconst root = ReactDOM.createRoot(container);\nroot.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);`
+        }
+      ]
+    },
+    {
+      id: "react-upgrade",
+      title: "React Upgrading (Legacy vs 18+)",
+      duration: "12 min",
+      content: `<h2 class="text-2xl font-bold text-white mb-4">Upgrading to Modern React APIs</h2>\n<p class="text-gray-300 mb-4">Older legacy code bases utilize the outdated <code>ReactDOM.render</code> method from version 17. Upgrading requires switching out imports to pull from <code>react-dom/client</code> and implementing the non-blocking concurrent rendering structure.</p>`,
+      codeBlocks: [
+        {
+          lang: "jsx",
+          label: "MigrationComparison.jsx",
+          code: `// ❌ OLD WAY (React 17 and below):\n// import ReactDOM from 'react-dom';\n// ReactDOM.render(<App />, document.getElementById('root'));\n\n//  NEW WAY (React 18+ Concurrent Engine):\nimport ReactDOM from 'react-dom/client';\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);`
+        }
+      ]
     }
   ]
 }
 ];
   
 
+
   
 
+
+  
+  
   // ============================================================================
   // LessonView Component
   // ============================================================================
